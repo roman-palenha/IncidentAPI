@@ -1,0 +1,15 @@
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\Business.deps.json
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\Business.dll
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\ref\Business.dll
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\Business.pdb
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\Data.dll
+F:\IncidentAPI\IncidentAPI\Business\bin\Debug\net6.0\Data.pdb
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.csproj.AssemblyReference.cache
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.GeneratedMSBuildEditorConfig.editorconfig
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.AssemblyInfoInputs.cache
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.AssemblyInfo.cs
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.csproj.CoreCompileInputs.cache
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.csproj.CopyComplete
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.dll
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\ref\Business.dll
+F:\IncidentAPI\IncidentAPI\Business\obj\Debug\net6.0\Business.pdb
