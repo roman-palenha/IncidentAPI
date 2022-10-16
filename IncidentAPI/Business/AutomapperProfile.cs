@@ -20,6 +20,12 @@ namespace Business
             CreateMap<IncidentDto, Incident>()
                 .ForMember(i => i.Description, idto => idto.MapFrom(x => x.IncidentDescription));
 
+            CreateMap<AccountDto, Contact>()
+                .ForMember(c => c.FirstName, i => i.MapFrom(x => x.ContactName))
+                .ForMember(c => c.LastName, i => i.MapFrom(x => x.ContactLastName));
+
+            CreateMap<AccountDto, Account>();
+
         }
     }
 }

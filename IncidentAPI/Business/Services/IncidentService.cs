@@ -26,28 +26,31 @@ namespace Business.Services
         {
             if (dto == null)
                 throw new ArgumentNullException(nameof(dto));
+
             var account = (await _unitOfWork.AccountRepository.GetAllAsync())
                 .FirstOrDefault(x => x.Name.Equals(dto.AccountName));
             if (account == null)
                 throw new IncidentException("No valid account");
+
             var contact = (await _unitOfWork.ContactRepository.GetAllAsync())
                 .FirstOrDefault(x => x.Email.Equals(dto.Email));
-            if (contact != null)
+            if (contact == null)
             {
-                _mapper.Map(dto, contact);
-                _unitOfWork.ContactRepository.Update(contact);
+                contact = _mapper.Map<Contact>(dto);
+                contact.Email = dto.Email;
+                account.Contact = contact;
+                await _unitOfWork.ContactRepository.AddAsync(contact);
             }
             else
             {
-                var newContact = _mapper.Map<Contact>(dto);
-                newContact.Email = dto.Email;
-                account.Contact = newContact;
-                await _unitOfWork.ContactRepository.AddAsync(newContact);
+                _mapper.Map(dto, contact);
+                _unitOfWork.ContactRepository.Update(contact);
             }
 
             var incident = _mapper.Map<Incident>(dto);
             incident.Account = account;
             incident.Id = Guid.NewGuid();
+
             await _unitOfWork.IncidentRepository.AddAsync(incident);
             await _unitOfWork.SaveAsync();
 
@@ -58,6 +61,7 @@ namespace Business.Services
             var incident = await _unitOfWork.IncidentRepository.GetByIdAsync(id);
             if (incident == null)
                 throw new IncidentException("Not found");
+
             await _unitOfWork.IncidentRepository.DeleteByIdAsync(id);
             await _unitOfWork.SaveAsync();
         }
@@ -80,6 +84,7 @@ namespace Business.Services
                 .FirstOrDefault(x => x.Name.Equals(dto.AccountName));
             if (account == null)
                 throw new IncidentException("No valid account");
+
             var incident = _mapper.Map<Incident>(dto);
             incident.Account = account;
             _unitOfWork.IncidentRepository.Update(incident);

@@ -31,10 +31,10 @@ namespace IncidentAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var incidents = await _incidentService.GetByIdAsync(id);
-            if (incidents == null)
+            var incident = await _incidentService.GetByIdAsync(id);
+            if (incident == null)
                 return NotFound();
-            return Ok(incidents);
+            return Ok(incident);
         }
 
         // POST api/<IncidentController>
