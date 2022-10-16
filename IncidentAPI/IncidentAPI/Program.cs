@@ -3,21 +3,19 @@ using Business.Interfaces;
 using Business.Services;
 using Data.Data;
 using Data.Interfaces;
+using IncidentAPI.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<AppDbContext>(opts => opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
+builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(AutomapperProfile));
-builder.Services.AddScoped<IIncidentService, IncidentService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.ConfigureServices();
 
 var app = builder.Build();
 
