@@ -9,5 +9,7 @@ namespace Data.Interfaces
 {
     public interface IIncidentRepository : IRepository<Incident>
     {
+        Task<Incident> GetByName(string name);
+        Task DeleteByName(string name);
     }
 }

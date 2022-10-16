@@ -56,13 +56,13 @@ namespace Business.Services
 
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(string name)
         {
-            var incident = await _unitOfWork.IncidentRepository.GetByIdAsync(id);
+            var incident = await _unitOfWork.IncidentRepository.GetByName(name);
             if (incident == null)
                 throw new IncidentException("Not found");
 
-            await _unitOfWork.IncidentRepository.DeleteByIdAsync(id);
+            await _unitOfWork.IncidentRepository.DeleteByName(name);
             await _unitOfWork.SaveAsync();
         }
 

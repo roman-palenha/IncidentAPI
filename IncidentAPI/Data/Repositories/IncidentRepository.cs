@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Data.Data;
 using Data.Entities;
 using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -15,6 +16,17 @@ namespace Data.Repositories
             : base(dbContext)
         {
             
+        }
+
+        public async Task DeleteByName(string name)
+        {
+            var entity = await GetByName(name);
+            Delete(entity);
+        }
+
+        public async Task<Incident> GetByName(string name)
+        {
+            return await DbContext.Set<Incident>().FirstOrDefaultAsync(x => x.Name.Equals(name));
         }
     }
 }

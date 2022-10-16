@@ -18,6 +18,6 @@ namespace Business.Interfaces
 
         Task UpdateAsync(IncidentUpdateDto dto);
 
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(string name);
     }
 }

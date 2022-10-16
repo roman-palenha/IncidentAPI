@@ -66,12 +66,12 @@ namespace IncidentAPI.Controllers
 
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> Delete(string name)
         {
             try
             {
-                await _incidentService.DeleteAsync(id);
+                await _incidentService.DeleteAsync(name);
             }
             catch (Exception ex)
             {
