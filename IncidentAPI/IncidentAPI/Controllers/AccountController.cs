@@ -1,6 +1,5 @@
 ﻿using Business.DTO;
 using Business.Interfaces;
-using Business.Validation;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,43 +8,39 @@ namespace IncidentAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IncidentController : ControllerBase
+    public class AccountController : ControllerBase
     {
-        private readonly IIncidentService _incidentService;
+        private readonly IAccountService _accountService;
 
-        public IncidentController(IIncidentService incidentService)
+        public AccountController(IAccountService accountService)
         {
-            _incidentService = incidentService;
+            _accountService = accountService;
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var incidents = await _incidentService.GetAllAsync();
-            if(incidents == null)
+            var accounts = await _accountService.GetAllAsync();
+            if (accounts == null)
                 return NotFound();
-            return Ok(incidents);
+            return Ok(accounts);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var incident = await _incidentService.GetByIdAsync(id);
-            if (incident == null)
+            var account = await _accountService.GetByIdAsync(id);
+            if (account == null)
                 return NotFound();
-            return Ok(incident);
+            return Ok(account);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] IncidentDto incidentDto)
+        public async Task<IActionResult> Post([FromBody] AccountDto accountDto)
         {
             try
             {
-                await _incidentService.AddAsync(incidentDto);
-            }
-            catch (IncidentException)
-            {
-                return NotFound();
+                await _accountService.AddAsync(accountDto);
             }
             catch (Exception ex)
             {
@@ -56,14 +51,22 @@ namespace IncidentAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] IncidentUpdateDto incidentDto)
+        public async Task<IActionResult> Put(Guid id, [FromBody] AccountDto accountDto)
         {
-            var incident = await _incidentService.GetByIdAsync(id);
-            if (incident == null)
+            var account = await _accountService.GetByIdAsync(id);
+            if(account == null)
                 return NotFound();
-            await _incidentService.UpdateAsync(incidentDto);
-            return StatusCode(204);
 
+            try
+            {
+                await _accountService.UpdateAsync(accountDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            return StatusCode(204);
         }
 
         [HttpDelete("{id}")]
@@ -71,7 +74,7 @@ namespace IncidentAPI.Controllers
         {
             try
             {
-                await _incidentService.DeleteAsync(id);
+                await _accountService.DeleteAsync(id);
             }
             catch (Exception ex)
             {
